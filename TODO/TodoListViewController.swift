@@ -15,7 +15,7 @@ class TodoListViewController: UITableViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-    let itemArray = [" 购买水杯 "," 吃药 "," 修改密码 "]
+    var itemArray = [" 购买水杯 "," 吃药 "," 修改密码 "]
 
     //MARK: - Table View DataSource methods
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -45,6 +45,32 @@ class TodoListViewController: UITableViewController {
     }
     
     
+    @IBAction func addButtonItem(_ sender: UIBarButtonItem) {
+        
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: " 添加一个新的ToDo项目 ", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: " 添加项目 ", style: .default) { (action) in
+            // user click + then run code as below
+            //print("成功!")
+            print(textField.text!)
+            self.itemArray.append(textField.text!)
+            self.tableView.reloadData()
+        }
+        
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "创建一个新项目..."
+            //print(alertTextField.text!)
+            textField = alertTextField
+            
+        }
+            
+        
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    
+    }
     
 }
 
